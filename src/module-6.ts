@@ -17,9 +17,6 @@ const result1 = kgToGMConverter(10) as number;
 const result2 = kgToGMConverter('10 kg') as string;
 // console.log({ result1, result2 });
 
-
-
-
 /* 
 =============================
  type interface
@@ -34,34 +31,30 @@ interface IUser {
 }
 
 interface IUserWithRole extends IUser {
-  isAdmin: boolean
+  isAdmin: boolean;
 }
 
 const user: IUserWithRole = {
   id: 10,
   name: 'Mohammad',
-  isAdmin: true
-}
+  isAdmin: true,
+};
 
 // console.log(user);
 
+// #function example
 
-// #function example 
-
-type Add = (num1: number, num2: number) => number;  // use with type alias
+type Add = (num1: number, num2: number) => number; // use with type alias
 
 interface IAdd {
-  (num1: number, num2: number) : number;
+  (num1: number, num2: number): number;
 }
 
 const add: IAdd = (num1, num2) => num1 + num2;
 
-
-
-
 // #array example
 interface IFriends {
-  [index: number] : string;
+  [index: number]: string;
 }
 
 const friends: IFriends = ['A', 'B', 'C'];
@@ -71,20 +64,66 @@ const friends: IFriends = ['A', 'B', 'C'];
 interface IFriend {
   id: number;
   age: number;
-  name: string
+  name: string;
 }
 
 interface IAdmin extends IFriend {
-  isAdmin: boolean
+  isAdmin: boolean;
 }
 
 const friendsNames: IAdmin = {
   id: 1,
   age: 32,
   name: 'Mohammad',
-  isAdmin: true
+  isAdmin: true,
 };
 
 console.log(friendsNames);
-// console.log(friendsNames); 
+// console.log(friendsNames);
 
+/*
+===================================  
+ Generic
+===================================  
+*/
+
+type GenericArray<T> = Array<T>;
+
+// const fruits : string[] = ['apple', 'banana', 'orange', 'lemon'];
+const fruits: GenericArray<string> = ['apple', 'banana', 'orange', 'lemon'];
+
+// const rollNumbers: number[] = [12, 21, 78, 55];
+const rollNumbers: GenericArray<number> = [12, 21, 78, 55];
+
+// const isEligible: boolean[] = [true, false, true];
+const isEligible: GenericArray<boolean> = [true, false, true];
+
+// another example
+type Coordinates<T, X> = [T, X];
+const coordinatesOne: Coordinates<number, number> = [20, 30];
+const coordinatesTwo: Coordinates<string, string> = ['20', '30'];
+
+// another example 2
+type UserList = {
+  name: string;
+  age: number;
+  favColor: string
+}
+
+const userList: GenericArray<UserList> = [
+  {
+    name: 'Mohammad',
+    age: 23,
+    favColor: 'blue'
+  },
+  {
+    name: 'Liza',
+    age: 20,
+    favColor: 'yellow'
+  },
+  {
+    name: 'Mohammad',
+    age: 12,
+    favColor: 'red'
+  }
+];
